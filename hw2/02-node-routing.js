@@ -1,4 +1,4 @@
-const http = require('http');
+const http = require("http");
 const port = process.env.PORT || 5001;
 
 // http://localhost:5001/welcome should return a status code 200 with a welcome message of your choice in html format
@@ -13,17 +13,67 @@ const port = process.env.PORT || 5001;
 
 const server = http.createServer((req, res) => {
   const routes = [
-    'welcome',
-    'redirect',
-    'redirected',
-    'cache',
-    'cookie',
-    'other',
+    "welcome",
+    "redirect",
+    "redirected",
+    "cache",
+    "cookie",
+    "other",
   ];
 
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('Node Routing Exercise');
-  res.end();
+  if (req.url === "/welcome") {
+    res.writeHead(200, { "content-type": "text/html" });
+    res.write(`
+    <html>
+      <head><title>Welcome Page</title></head>
+      <body>
+        <h1>Welcome to this page!</h1>
+      </body>
+    </html>
+  `);
+  } else if (req.url === "/redirect") {
+    res.writeHead(302, { location: "/redirected" });
+    res.end();
+  } else if (req.url === "/redirected") {
+    res.writeHead(200, { "content-type": "text/html" });
+    res.write(`
+    <html>
+      <head><title>Redirected Page</title></head>
+      <body>
+        <h1>You have been redirected!</h1>
+      </body>
+    </html>
+  `);
+    res.end();
+  } else if (req.url === "/cache") {
+    res.writeHead("Cache-Control", "max-age=86400");
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.write(`
+    <html>
+      <head><title>Cached Response</title></head>
+      <body>
+        <h1>This resource was cached</h1>
+      </body>
+    </html>
+  `);
+    res.end();
+  } else if (req.url === "/cookie") {
+    res.writeHead(200, {
+      "content-type": "text/plain",
+      "set-cookie": ["hello=world"],
+    });
+  } else {
+    res.writeHead(404, { "Content-Type": "text/html" });
+    res.write(`
+    <html>
+      <head><title>Page Not Found</title></head>
+      <body>
+        <h1>Oops! This page could not be found</h1>
+      </body>
+    </html>
+  `);
+    res.end();
+  }
 });
 
 server.listen(port, () => {
