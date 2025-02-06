@@ -2,18 +2,18 @@ const calculateChange = function calculateChange(cash) {
   if (cash > 100) {
     return "Error: the number is too large";
   } else if (cash < 0) {
-    return "Error: the number is too small";
+    return "Error: please enter a positive number";
   }
 
-  var returnString = cash.toString() + "$ ==> ";
+  let returnString = cash.toString() + "$ ==> ";
 
-  var dollars = Math.floor(cash);
-  var dollar_comma = "";
-  var cents = {
+  let dollars = Math.floor(cash);
+  let dollar_comma = "";
+  let cents = {
     total: 0,
     quarter: { value: 0, comma: 0 },
-    nickel: { value: 0, comma: 0 },
     dime: { value: 0, comma: 0 },
+    nickel: { value: 0, comma: 0 },
     penny: { value: 0, comma: 0 },
   };
   cents["total"] = (cash % 1).toFixed(2) * 100;
@@ -25,30 +25,23 @@ const calculateChange = function calculateChange(cash) {
     returnString += dollars.toString() + " dollars" + dollar_comma;
   }
 
-  while (cents["total"] > 0) {
-    if (cents["total"] >= 25) {
-      cents["quarter"]["value"] += 1;
-      cents["total"] -= 25;
-    } else if (cents["total"] >= 10) {
-      cents["dime"]["value"] += 1;
+  cents["quarter"]["value"] = Math.floor(cents["total"] / 25);
+  cents["total"] -= cents["quarter"]["value"] * 25;
 
-      cents["quarter"]["comma"] = 1;
-      cents["total"] -= 10;
-    } else if (cents["total"] >= 5) {
-      cents["nickel"]["value"] += 1;
+  cents["dime"]["value"] = Math.floor(cents["total"] / 10);
+  cents["total"] -= cents["dime"]["value"] * 10;
+  cents["quarter"]["comma"] += 1;
 
-      cents["quarter"]["comma"] = 1;
-      cents["dime"]["comma"] = 1;
-      cents["total"] -= 5;
-    } else {
-      cents["penny"]["value"] += 1;
+  cents["nickel"]["value"] = Math.floor(cents["total"] / 5);
+  cents["total"] -= cents["nickel"]["value"] * 5;
+  cents["quarter"]["comma"] += 1;
+  cents["dime"]["comma"] += 1;
 
-      cents["quarter"]["comma"] = 1;
-      cents["dime"]["comma"] = 1;
-      cents["nickel"]["comma"] = 1;
-      cents["total"] -= 1;
-    }
-  }
+  cents["penny"]["value"] = Math.floor(cents["total"] / 1);
+  cents["total"] -= cents["penny"]["value"] * 1;
+  cents["quarter"]["comma"] += 1;
+  cents["dime"]["comma"] += 1;
+  cents["nickel"]["comma"] += 1;
 
   for (const key in cents) {
     if (key != "total" && cents[key]["value"]) {

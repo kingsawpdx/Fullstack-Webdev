@@ -23,7 +23,7 @@ app.get("/form", (req, res) => {
             <input type="email" id="email" name="email" required /><br>
             
             <label for="comment">Comments: </label>
-            <input type="comment" id="comment" name="comment" /><br>
+            <input type="text" id="comment" name="comment" /><br>
 
             <p>Would you like to sign up for the newsletter?</p>
             <input type="radio" id="no" name="newsLetter" value="No, thank you." required>

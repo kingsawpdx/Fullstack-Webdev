@@ -58,9 +58,10 @@ const server = http.createServer((req, res) => {
   `);
     res.end();
   } else if (req.url === "/cookie") {
-    res.setHeader("Set-Cookie", "hello=world; Path=/; HttpOnly");
-    res.write("cookies... yummm");
-    res.end();
+    res.writeHead(200, {
+      "content-type": "text/plain",
+      "set-cookie": ["hello=world"],
+    });
   } else {
     res.writeHead(404, { "Content-Type": "text/html" });
     res.write(`
