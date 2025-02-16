@@ -1,0 +1,26 @@
+doctype html 
+html(lang='en')
+    head
+        style
+            include style.css
+        title Regions
+    body 
+        h1 Regions
+        div.navbar
+            ul.navUL
+                li.navLI 
+                    a(href='/home') Home
+                li.navLI
+                    a(href='/capitals') Capitals
+            
+                li.navLI 
+                    a(href='populous') Populous 
+            
+                li.navLI
+                    a(href='regions') Regions
+
+        div.dataList
+            ol
+                each country in regions
+                    li #{country.region} - #{country.occurance}
+                    br
