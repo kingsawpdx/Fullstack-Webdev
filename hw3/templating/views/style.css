@@ -1,0 +1,57 @@
+/* public/style.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.navUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navLI {
+  float: left;
+}
+
+.navLI a {
+  display: block;
+  padding: 14px 20px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
+.navLI a:hover {
+  background-color: #575757;
+}
+
+.populous {
+  margin-top: 30px;
+}
+
+.dataList {
+  padding: 10;
+}
+
+.dataList li {
+  padding: 8px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin: 5px 0;
+  border-radius: 4px;
+}

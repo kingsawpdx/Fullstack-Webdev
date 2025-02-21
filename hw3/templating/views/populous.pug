@@ -1,0 +1,26 @@
+doctype html 
+html(lang='en')
+    head
+        style
+            include style.css
+        title Populous
+    body 
+        h1 Most Populous Countries
+        div.navbar
+            ul.navUL
+                li.navLI 
+                    a(href='/home') Home
+                li.navLI
+                    a(href='/capitals') Capitals
+            
+                li.navLI 
+                    a(href='populous') Populous 
+            
+                li.navLI
+                    a(href='regions') Regions
+        
+        div.dataList
+            ol
+                each country in countries
+                    li #{country.name.common} - #{country.population}
+                    br
